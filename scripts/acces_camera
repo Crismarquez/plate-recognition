@@ -1,0 +1,25 @@
+import cv2
+
+device = 0
+cap = cv2.VideoCapture(device)
+
+if not cap.isOpened():
+    print(f"Cannot open {device}")
+    exit()
+
+print("Starting to read license plate")
+while True:
+
+    ret, frame = cap.read()
+
+    if not ret:
+        print("Cannot receive frames. Exiting...")
+        break
+
+    cv2.imshow("plate-detected", frame)
+
+    if cv2.waitKey(1) == ord("q"): 
+        break
+
+cap.release()
+cv2.destroyAllWindows()
